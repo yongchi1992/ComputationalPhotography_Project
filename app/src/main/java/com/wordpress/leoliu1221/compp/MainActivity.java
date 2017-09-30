@@ -584,11 +584,11 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback {
                     //Set different gains
                     //Gains = k* Sensitivity (true)
                     //TODO: getting range of sensitivities supported using SENSOR_INFO_SENSITIVITY_RANGE:
-                    Range<Integer> sstt = characteristics.get(null);
+                    Range<Integer> sstt = characteristics.get(CameraCharacteristics.SENSOR_INFO_SENSITIVITY_RANGE);
 
                     //TODO:getting lower and higher sensitivity
-                    Integer lower_sstt = 0;
-                    Integer higher_sstt = 0;
+                    Integer lower_sstt = sstt.getLower();
+                    Integer higher_sstt = sstt.getUpper();
                     Log.e(TAG, "lowersstt " + lower_sstt);
                     Log.e(TAG, "highersstt " + higher_sstt);
                     //TODO:Change the capture request's sensitivity
