@@ -592,7 +592,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback {
                     Log.e(TAG, "lowersstt " + lower_sstt);
                     Log.e(TAG, "highersstt " + higher_sstt);
                     //TODO:Change the capture request's sensitivity
-                    requester.set(CaptureRequest.SENSOR_SENSITIVITY, 0);
+                    requester.set(CaptureRequest.SENSOR_SENSITIVITY, 0);  //First time min, second time max
                     try {
                         // This handler can be null because we aren't actually attaching any callback
                         rawChars.add(getCharacteristics());
