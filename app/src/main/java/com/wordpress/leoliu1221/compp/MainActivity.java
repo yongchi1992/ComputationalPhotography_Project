@@ -569,7 +569,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback {
     public void captureRAW() {
         //TODO:hw2
         //Set different capture numbers, but no larger than the buffer size (defaults to 51)
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 10; i++) {
             //sleep the system clock for 200 ms
             SystemClock.sleep(200);
             if (mCaptureSession != null) {
@@ -592,7 +592,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback {
                     Log.e(TAG, "lowersstt " + lower_sstt);
                     Log.e(TAG, "highersstt " + higher_sstt);
                     //TODO:Change the capture request's sensitivity
-                    requester.set(CaptureRequest.SENSOR_SENSITIVITY, 0);  //First time min, second time max
+                    requester.set(CaptureRequest.SENSOR_SENSITIVITY, lower_sstt);  //First time min, second time max
                     try {
                         // This handler can be null because we aren't actually attaching any callback
                         rawChars.add(getCharacteristics());
