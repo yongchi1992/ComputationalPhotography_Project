@@ -154,24 +154,24 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback {
 
                 //TODO:set the foreground to be black
                 final int black_color = 0xFF000000;
-                final Drawable f_black_color = new ColorDrawable(0);
-                main_frame.setForeground(null);
+                final Drawable f_black_color = new ColorDrawable(black_color);
+                main_frame.setForeground(f_black_color);
                 Log.e(TAG, "setting black color");
 
                 //TODO:take picture as jpg
-
+                captureJPEG();
 
                 final int white_color = 0xFFFFFFFF;
-                final Drawable f_white_color = new ColorDrawable(0);
+                final Drawable f_white_color = new ColorDrawable(white_color);
 
                 //TODO: set the foreground to be white with 200 ms delay
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     public void run() {
                         Log.e(TAG, "setting white color");
-                        main_frame.setForeground(null);
+                        main_frame.setForeground(f_white_color);
                         //TODO: take picture as jpg
-
+                        captureJPEG();
                     }
                 }, 200);
 
@@ -180,7 +180,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback {
                     public void run() {
                         main_frame.setForeground(null);
                         //TODO: take picture as jpg
-
+                        captureJPEG();
                     }
                 }, 400);
 
