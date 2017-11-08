@@ -545,7 +545,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback {
         if (mCaptureSession != null) {
             try {
                 CaptureRequest.Builder requester =
-                        mCameraDevice.createCaptureRequest(mCameraDevice.TEMPLATE_MANUAL);
+                        mCameraDevice.createCaptureRequest(mCameraDevice.TEMPLATE_STILL_CAPTURE);
                 requester.addTarget(mCaptureBuffer.getSurface());
 
                 try {
@@ -695,23 +695,24 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback {
         //TODO:hw4
         //TODO: Getting min and max exposures.
         Range<Long> exposureRange = characteristics.get(CameraCharacteristics.SENSOR_INFO_EXPOSURE_TIME_RANGE);
-        Long minimumExposure = 0L;
-        Long maximumExposure = 0L;
+        Long minimumExposure = exposureRange.getLower();
+        Long maximumExposure = exposureRange.getUpper();
         Log.e(TAG, "minimumExposure: " + minimumExposure);
         Log.e(TAG, "maximumExposure: " + maximumExposure);
         Long prevExposure = minimumExposure;
         //check if 2* exposure >maximumExposure
-        while (prevExposure + prevExposure < 0) {
+        while (prevExposure + prevExposure < maximumExposure) {
             try {
                 //sleep the system for 20ms between each capture.
                 SystemClock.sleep(20);
                 Log.e(TAG, "exposure: " + prevExposure);
                 //TODO:update exposure time
-                prevExposure = 0+prevExposure;
+                prevExposure = prevExposure+prevExposure;
                 //create capture requester
-                CaptureRequest.Builder requester = mCameraDevice.createCaptureRequest(mCameraDevice.TEMPLATE_MANUAL);
+                CaptureRequest.Builder requester = mCameraDevice.createCaptureRequest(mCameraDevice.TEMPLATE_STILL_CAPTURE);
+                requester.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_OFF );
                 //TODO: set requester exposure time
-                requester.set(null, prevExposure);
+                requester.set(CaptureRequest.SENSOR_EXPOSURE_TIME, prevExposure);
                 //add surface
                 requester.addTarget(mCaptureBuffer.getSurface());
                 Log.e(TAG, "exposure: " + prevExposure);
